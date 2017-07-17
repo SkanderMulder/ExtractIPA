@@ -2,7 +2,7 @@ library('xlsx');library('hellno')
 list.files()
 
 # x<-read.xlsx('allMet_alb_est.xls',1,startRow=2)
-source("C:/Users/smulder/Dropbox/tmpwork/Paper1/SupporterFunctions/searchfunv2.r")
+source("searchfunv2.r")
 
 #forloop to get the listnames
 convertRawIPAoutput<-function(x,foldername='+.>Skander_shared')
