@@ -71,20 +71,15 @@ TOPLOTs<-subset(TOPLOT, overlapfactors13 | overlapfactors);if(!plots)return(TOPL
 if(turnround2)names(TOPLOT)<-names(TOPLOT[,c(2,1,3)])
 #musthaveoverlapWtranscriptome
 
-# olap1<-TOPLOTs[,1] %in%  allselectorSYNC  |  TOPLOTs[,1] %in% TOPLOTs[,2] #checkifserumin trans
-# olap2<-TOPLOTs[,2] %in%  allselectorSYNC  | TOPLOTs[,2] %in%  TOPLOTs[,1]#checks if trans in serum
+olap1<-TOPLOTs[,1] %in%  allselectorSYNC  |  TOPLOTs[,1] %in% TOPLOTs[,2] #checkifserumin trans
+olap2<-TOPLOTs[,2] %in%  allselectorSYNC  | TOPLOTs[,2] %in%  TOPLOTs[,1]#checks if trans in serum
 
-olap1 =   TOPLOTs[,1]  %in%   c("Serum Metabolites"  ,      "Urinary Proteins")  |  TOPLOTs[,2]  %in%   c("Serum Metabolites"  ,      "Urinary Proteins")  #serumurine IN transcriptomic
-olap2 =   TOPLOTs[,1]  %in%   c( "Glomerulus Transcriptome","Tubule Transcriptome"   )  |  TOPLOTs[,2]  %in%   c("Serum Metabolites"  ,      "Urinary Proteins")  #serumurine IN transcriptomic
-
-olap1S= TOPLOTs[,1] %in% TOPLOTs[olap2,1] + olap1
-olap2S= TOPLOTs[,1] %in% TOPLOTs[olap1,1] + olap2
 
 if(!  OLAP==0)
 {
-if(OLAP==1)TOPLOTs<-TOPLOTs[which(olap1S),]
-if(OLAP==2)TOPLOTs<-TOPLOTs[which(olap2S),]
-if(OLAP==3) TOPLOTs<-TOPLOTs[which(olap1S &olap2S),]
+if(OLAP==1)TOPLOTs<-TOPLOTs[which(olap1),]
+if(OLAP==2)TOPLOTs<-TOPLOTs[which(olap2),]
+if(OLAP==3) TOPLOTs<-TOPLOTs[which(olap1 &olap2),]
 }
 whatTranscript<-grep('ranscr',TOPLOTs[,2])
 
@@ -177,8 +172,8 @@ names(names_pahtwayorder)<-NULL; names_pahtwayorder
 if(is.na(COLOBJ))
 COLOBJ<-matrix(c('Serum Metabolites','red',
 'Urinary Proteins','yellow',
-'Glomerulus Transcriptome','black',
-'Tubule Transcriptome','green'
+'Glomerulus Transcriptome','gray',
+'Tubule Transcriptome','gray'
 ), ncol=2,byrow=TRUE)#THISNEEDSTOBEREMOVEd)
 
 

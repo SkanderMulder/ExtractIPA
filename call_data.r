@@ -11,6 +11,7 @@ allselector<-c( "allMet_renal30conf0HR.xls" ,'allProt_renal30conf0HR.xls','dkd_g
 allselector %in% names(objtoman)
 allselectorSYNC<-c('Serum Metabolites','Urinary Proteins','Glomerulus Transcriptome','Tubule Transcriptome')
 CanonicalPathway_all<-CanonicalPathwayPlot(turnround2=TRUE,coloverload= rep(rgb(200/255,200/255,200/255),10000),turnaround=FALSE,overlapfactor=2,p=0.05,transR=FALSE,OLAP=0)#,coloverload=c('gray','red','blue','black')) 
+
 #early
 allselector<-c( "earlyMet_renal30conf0HR.xls" ,'earlyProt_renal30conf0HR.xls','dkd_glom_ellu_egfr.xls','dkd_tub_ellu_egfr.xls')
 allselector %in% names(objtoman)
@@ -102,16 +103,15 @@ allselectorSYNC<-c(rep('Early DKD',4),rep('Late DKD',4),rep('Glom Transcriptome'
 
 colstovl<-rep(rgb(200/255,200/255,200/255),10000)
 
-COLOBJ<-matrix(c('Early DKD','green','Late DKD','red'),ncol=2,byrow=TRUE);
+# COLOBJ<-matrix(c('Early DKD','green','Late DKD','red'),ncol=2,byrow=TRUE);
 
-
-colstovl<-rep(rgb(200/255,200/255,200/255),10000)
-colstovl[999]<-'black'; colstovl[10]<-'red';colstovl[1]<-'blue'
-
-CanonicalPathway_eaaa<-CanonicalPathwayPlot(turnaround=FALSE,overlapfactor=1,p=0.05,coloverload =colstovl,OLAP=3,COLOBJ=COLOBJ)#,coloverload=rev(c('green','orange','gray')) )
-
-
-
+if(is.na(COLOBJ))
+COLOBJ<-matrix(c('Early DKD','red',
+'Late DKD','yellow',
+'Glom Transcriptome','black',
+'Tub Transcriptome','green'
+), ncol=2,byrow=TRUE) #THISNEEDSTOBEREMOVEd)
+CanonicalPathway_eaaa<-CanonicalPathwayPlot(turnaround=FALSE,overlapfactor=2,p=0.05,coloverload =colstovl,OLAP=0,COLOBJ=COLOBJ)#,coloverload=rev(c('green','orange','gray')) )
 
 wb2<-createWorkbook()
 for(i in 0:3)
