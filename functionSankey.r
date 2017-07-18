@@ -71,15 +71,20 @@ TOPLOTs<-subset(TOPLOT, overlapfactors13 | overlapfactors);if(!plots)return(TOPL
 if(turnround2)names(TOPLOT)<-names(TOPLOT[,c(2,1,3)])
 #musthaveoverlapWtranscriptome
 
-olap1<-TOPLOTs[,1] %in%  allselectorSYNC  |  TOPLOTs[,1] %in% TOPLOTs[,2] #checkifserumin trans
-olap2<-TOPLOTs[,2] %in%  allselectorSYNC  | TOPLOTs[,2] %in%  TOPLOTs[,1]#checks if trans in serum
+# olap1<-TOPLOTs[,1] %in%  allselectorSYNC  |  TOPLOTs[,1] %in% TOPLOTs[,2] #checkifserumin trans
+# olap2<-TOPLOTs[,2] %in%  allselectorSYNC  | TOPLOTs[,2] %in%  TOPLOTs[,1]#checks if trans in serum
 
+olap1 =   TOPLOTs[,1]  %in%   c("Serum Metabolites"  ,      "Urinary Proteins")  |  TOPLOTs[,2]  %in%   c("Serum Metabolites"  ,      "Urinary Proteins")  #serumurine IN transcriptomic
+olap2 =   TOPLOTs[,1]  %in%   c( "Glomerulus Transcriptome","Tubule Transcriptome"   )  |  TOPLOTs[,2]  %in%   c("Serum Metabolites"  ,      "Urinary Proteins")  #serumurine IN transcriptomic
+
+olap1S= TOPLOTs[,1] %in% TOPLOTs[olap2,1] + olap1
+olap2S= TOPLOTs[,1] %in% TOPLOTs[olap1,1] + olap2
 
 if(!  OLAP==0)
 {
-if(OLAP==1)TOPLOTs<-TOPLOTs[which(olap1),]
-if(OLAP==2)TOPLOTs<-TOPLOTs[which(olap2),]
-if(OLAP==3) TOPLOTs<-TOPLOTs[which(olap1 &olap2),]
+if(OLAP==1)TOPLOTs<-TOPLOTs[which(olap1S),]
+if(OLAP==2)TOPLOTs<-TOPLOTs[which(olap2S),]
+if(OLAP==3) TOPLOTs<-TOPLOTs[which(olap1S &olap2S),]
 }
 whatTranscript<-grep('ranscr',TOPLOTs[,2])
 
@@ -163,25 +168,29 @@ obj_pw_col<-rbind(obj_pw_col,cbind( unique(TOPLOTs[,1]),rep('FFFFFF',length(uniq
 colors_node <-sapply(inputtocolnodes ,retcolmerger)
 
 ##HEREGETORDER
-names_pahtwayorder<-unlist(data.frame(t(TOPLOT[,1:2])))
+names_pahtwayorder<-unlist(data.frame(t(TOPLOTs[,1:2])))
 names_pahtwayorder<-names_pahtwayorder[!duplicated(names_pahtwayorder)]
 names(names_pahtwayorder)<-NULL; names_pahtwayorder
 
 
+
+if(is.na(COLOBJ))
 COLOBJ<-matrix(c('Serum Metabolites','red',
 'Urinary Proteins','yellow',
-'Glomerulus Transcriptome','purple',
+'Glomerulus Transcriptome','black',
 'Tubule Transcriptome','green'
-), ncol=2,byrow=TRUE)#THISNEEDSTOBEREMOVEd
+), ncol=2,byrow=TRUE)#THISNEEDSTOBEREMOVEd)
 
 
 colors_linkz<-rep('#4e9afc',90)
 if(!is.na(COLOBJ))for(i in 1:nrow(COLOBJ))
 {
 colors_linkz[which(COLOBJ[i,1] == names_pahtwayorder )] <- COLOBJ[i,2]
-print(which(COLOBJ[,1] == names_pahtwayorder ))
+print(which(COLOBJ[i,1] == names_pahtwayorder ))
 }
 #ENDGETORDER
+
+# colors_linkz[3] <-'black'
 
 
 gry<-rgb(200/255,200/255,200/255);bluelight<-'#4e9afc'; purplelight<-'#ff3db4' ;greenlight<-'#90f77b'

@@ -10,8 +10,7 @@ x=1:3
 allselector<-c( "allMet_renal30conf0HR.xls" ,'allProt_renal30conf0HR.xls','dkd_glom_ellu_egfr.xls','dkd_tub_ellu_egfr.xls')
 allselector %in% names(objtoman)
 allselectorSYNC<-c('Serum Metabolites','Urinary Proteins','Glomerulus Transcriptome','Tubule Transcriptome')
-CanonicalPathway_all<-CanonicalPathwayPlot(turnround2=TRUE,coloverload= rep(rgb(200/255,200/255,200/255),10000),turnaround=FALSE,overlapfactor=1,p=0.05,transR=FALSE,OLAP=3)#,coloverload=c('gray','red','blue','black')) 
-
+CanonicalPathway_all<-CanonicalPathwayPlot(turnround2=TRUE,coloverload= rep(rgb(200/255,200/255,200/255),10000),turnaround=FALSE,overlapfactor=2,p=0.05,transR=FALSE,OLAP=0)#,coloverload=c('gray','red','blue','black')) 
 #early
 allselector<-c( "earlyMet_renal30conf0HR.xls" ,'earlyProt_renal30conf0HR.xls','dkd_glom_ellu_egfr.xls','dkd_tub_ellu_egfr.xls')
 allselector %in% names(objtoman)
