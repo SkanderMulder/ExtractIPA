@@ -105,12 +105,14 @@ colstovl<-rep(rgb(200/255,200/255,200/255),10000)
 
 # COLOBJ<-matrix(c('Early DKD','green','Late DKD','red'),ncol=2,byrow=TRUE);
 
-if(is.na(COLOBJ))
+
+
 COLOBJ<-matrix(c('Early DKD','red',
 'Late DKD','yellow',
-'Glom Transcriptome','black',
-'Tub Transcriptome','green'
+'Glom Transcriptome','gray',
+'Tub Transcriptome','gray'
 ), ncol=2,byrow=TRUE) #THISNEEDSTOBEREMOVEd)
+
 CanonicalPathway_eaaa<-CanonicalPathwayPlot(turnaround=FALSE,overlapfactor=2,p=0.05,coloverload =colstovl,OLAP=0,COLOBJ=COLOBJ)#,coloverload=rev(c('green','orange','gray')) )
 
 wb2<-createWorkbook()
@@ -118,7 +120,7 @@ for(i in 0:3)
 {
 print(i)
 addWorksheet(wb2, paste0("olap",i), gridLines = TRUE)
-CanonicalPathway_eaaa<-CanonicalPathwayPlot(plots=TRUE,turnaround=FALSE,overlapfactor=1,p=0.05,coloverload =colstovl,OLAP=1)#,coloverload=rev(c('green','orange','gray')) )
+CanonicalPathway_eaaa<-CanonicalPathwayPlot(plots=TRUE,turnaround=FALSE,overlapfactor=1,p=0.05,coloverload =colstovl,OLAP=i,COLOBJ=COLOBJ)#,coloverload=rev(c('green','orange','gray')) )
 print(paste(i, dim(CanonicalPathway_eaaa)))
 wholelist=unique(c(CanonicalPathway_eaaa$Go, CanonicalPathway_eaaa$Pathway))
 writeData(wb2,paste0("olap",i),data.frame(wholelist))
