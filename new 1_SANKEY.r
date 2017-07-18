@@ -189,11 +189,14 @@ names_pahtwayorder<-unlist(data.frame(t(TOPLOT[,1:2])))
 names_pahtwayorder<-names_pahtwayorder[!duplicated(names_pahtwayorder)]
 names(names_pahtwayorder)<-NULL; names_pahtwayorder
 
+
+COLOBJ<-matrix(c('Serum Metabolome','red'), ncol=2)
+
 if(!is.na(COLOBJ))for(i in 1:nrow(COLOBJ))
 {
 colors_linkz[which(COLOBJ[,i] == names_pahtwayorder )] <- COLOBJ[,i]
 }
-#END
+#ENDGETORDER
 
 gry<-rgb(200/255,200/255,200/255);bluelight<-'#4e9afc'; purplelight<-'#ff3db4' ;greenlight<-'#90f77b'
 colors_linkz<-coloverload

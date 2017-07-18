@@ -167,14 +167,25 @@ names_pahtwayorder<-unlist(data.frame(t(TOPLOT[,1:2])))
 names_pahtwayorder<-names_pahtwayorder[!duplicated(names_pahtwayorder)]
 names(names_pahtwayorder)<-NULL; names_pahtwayorder
 
+
+COLOBJ<-matrix(c('Serum Metabolites','red',
+'Urinary Proteins','yellow',
+'Glomerulus Transcriptome','purple',
+'Tubule Transcriptome','green'
+), ncol=2,byrow=TRUE)#THISNEEDSTOBEREMOVEd
+
+
+colors_linkz<-rep('#4e9afc',90)
 if(!is.na(COLOBJ))for(i in 1:nrow(COLOBJ))
 {
-colors_linkz[which(COLOBJ[,i] == names_pahtwayorder )] <- COLOBJ[,i]
+colors_linkz[which(COLOBJ[i,1] == names_pahtwayorder )] <- COLOBJ[i,2]
+print(which(COLOBJ[,1] == names_pahtwayorder ))
 }
-#END
+#ENDGETORDER
+
 
 gry<-rgb(200/255,200/255,200/255);bluelight<-'#4e9afc'; purplelight<-'#ff3db4' ;greenlight<-'#90f77b'
-colors_linkz<-coloverload
+# colors_linkz<-coloverload
 
 colors_linkz[which(is.na(colors_linkz) | is.na(colors_linkz) =='NA')]<- '000000'
 colors_node[which(is.na(colors_node) | is.na(colors_node) =='NA')]<- '000000'
@@ -187,6 +198,7 @@ colors_node_array <- paste0("[", paste0("'", colors_node,"'", collapse = ','), "
 ##HEREGETORDER
 names_pahtwayorder<-unlist(data.frame(t(TOPLOT[,1:2])))
 names_pahtwayorder<-names_pahtwayorder[!duplicated(names_pahtwayorder)]
+
 names(names_pahtwayorder)<-NULL; names_pahtwayorder
 
 
@@ -220,7 +232,7 @@ plot(
 #TOPLOTs$Pathway<-paste0(CC,TOPLOTs$Pathway)
 TOPLOTs$Pathway<-paste0(TOPLOTs$Pathway)
 return(TOPLOTs)
-
+		
 }
 
 getallpathway<-function()
